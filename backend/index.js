@@ -3,7 +3,6 @@ import express from "express";
 //mysql database to store structural data
 import mysql from "mysql";
 
-//18.37
 const app = express();
 
 //initialize db connection
