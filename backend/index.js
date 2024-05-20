@@ -2,7 +2,7 @@
 import express from "express";
 //mysql database to store structural data
 import mysql from "mysql";
-
+import cors from "cors";
 const app = express();
 
 //initialize db connection
@@ -14,6 +14,7 @@ const db = mysql.createConnection({
 });
 
 app.use(express.json());
+app.use(cors())
 
 //excute get code if path --> /
 app.get("/", (req,res)=>{
@@ -31,10 +32,11 @@ app.get("/books", (req,res)=>{
 
 //excute post code if path --> /books
 app.post("/books", (req,res)=>{
-    const q = "INSERT INTO books (`title`,`desc`,`cover`) VALUES (?)";
+    const q = "INSERT INTO books (`title`,`desc`,`price`,`cover`) VALUES (?)";
     const values = [
         req.body.title,
         req.body.desc,
+        req.body.price,
         req.body.cover
     ];
     db.query(q,[values],(err,data)=>{
